@@ -2,12 +2,10 @@
 var generateBtn = document.querySelector("#generate");
 password = "";
 
-// var lowerChar = "abcdefghijklmnopqrstuvwxyz";
-// var upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-// var speChar = "!@#$%^&*:;/?,.";
-// var number = "1234567890";
-
-
+var lowerChar = "abcdefghijklmnopqrstuvwxyz";
+var upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var speChar = "!@#$%^&*:;/?,.";
+var number = "1234567890";
 
 // var howManyCharNeeded = "";
 // var needUpperChar = true;
@@ -34,12 +32,8 @@ generateBtn.addEventListener("click", passParameters);
 //    return Math.floor(Math.random() * 4);
 //}
 
-function test(needUpperChar, needLowerChar, needNumber, needSpecChar, typesOfChar) {
-  if (needUpperChar)
-}
 
-
-function generatePassword(lowerChar, upperChar, speChar, number) {
+function generatePassword() {
     // all characters allowed
     if (needUpperChar === true && needLowerChar === true 
         && needNumber === true && needSpeChar === true) {
@@ -88,8 +82,7 @@ function generatePassword(lowerChar, upperChar, speChar, number) {
               password += passPiece;
           }
           return password;
-      }
-
+        }
     // no speChar or numbers
     if (needUpperChar === true && needLowerChar === true 
       && needNumber === false && needSpeChar === false) {
@@ -122,12 +115,92 @@ function generatePassword(lowerChar, upperChar, speChar, number) {
           }
           return password;
       }
+    // no speChar or numbers or lowercase
+    if (needUpperChar === true && needLowerChar === false 
+      && needNumber === false && needSpeChar === false) {
+          var typesOfChar = [upperChar];
+          function randomTypeOfChar() {
+            return Math.floor(Math.random() * 1);
+          }
+          for (i = 0; i < howManyCharNeeded; i++) {
+              typeNum = randomTypeOfChar();
+              type = typesOfChar[typeNum];
+              randomChar = type.charAt(Math.floor(Math.random() * type.length) );
+              passPiece = randomChar.toString();
+              password += passPiece;
+          }
+          return password;
+      }
+    // no uppercase or numbers or lowercase
+    if (needUpperChar === false && needLowerChar === false 
+      && needNumber === false && needSpeChar === true) {
+          var typesOfChar = [speChar];
+          function randomTypeOfChar() {
+            return Math.floor(Math.random() * 1);
+          }
+          for (i = 0; i < howManyCharNeeded; i++) {
+              typeNum = randomTypeOfChar();
+              type = typesOfChar[typeNum];
+              randomChar = type.charAt(Math.floor(Math.random() * type.length) );
+              passPiece = randomChar.toString();
+              password += passPiece;
+          }
+          return password;
+      }
+    // no uppercase or speChar or lowercase
+    if (needUpperChar === false && needLowerChar === false 
+      && needNumber === true && needSpeChar === false) {
+          var typesOfChar = [number];
+          function randomTypeOfChar() {
+            return Math.floor(Math.random() * 1);
+          }
+          for (i = 0; i < howManyCharNeeded; i++) {
+              typeNum = randomTypeOfChar();
+              type = typesOfChar[typeNum];
+              randomChar = type.charAt(Math.floor(Math.random() * type.length) );
+              passPiece = randomChar.toString();
+              password += passPiece;
+          }
+          return password;
+      }
+    // no lowercase
+    if (needUpperChar === true && needLowerChar === false 
+      && needNumber === true && needSpeChar === true) {
+          var typesOfChar = [upperChar, speChar, number];
+          function randomTypeOfChar() {
+            return Math.floor(Math.random() * 3);
+          }
+          for (i = 0; i < howManyCharNeeded; i++) {
+              typeNum = randomTypeOfChar();
+              type = typesOfChar[typeNum];
+              randomChar = type.charAt(Math.floor(Math.random() * type.length) );
+              passPiece = randomChar.toString();
+              password += passPiece;
+          }
+          return password;
+      }
+    // no upper
+    if (needUpperChar === false && needLowerChar === true 
+      && needNumber === true && needSpeChar === true) {
+          var typesOfChar = [lowerChar, speChar, number];
+          function randomTypeOfChar() {
+            return Math.floor(Math.random() * 3);
+          }
+          for (i = 0; i < howManyCharNeeded; i++) {
+              typeNum = randomTypeOfChar();
+              type = typesOfChar[typeNum];
+              randomChar = type.charAt(Math.floor(Math.random() * type.length) );
+              passPiece = randomChar.toString();
+              password += passPiece;
+          }
+          return password;
+      }
 }
 
 // Write password to the #password input
 function writePassword() {
   
-  var password = generatePassword("abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "!@#$%^&*:;/?,.", "1234567890");
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
