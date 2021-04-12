@@ -6,16 +6,16 @@ var upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var speChar = "!@#$%^&*:;/?,.";
 var number = "1234567890";
 
+
 function passParameters() {
+  // howManyCharNeeded = 8;
   howManyCharNeededPrompt = prompt("How many characters do you need?");
   howManyCharNeeded = parseInt(howManyCharNeededPrompt, 10);
-  while (howManyCharNeeded < 8 && howManyCharNeeded > 128) {
-    howManyCharNeededPrompt = prompt("How many characters do you need?");
-  }
   needUpperChar = confirm("Do you want uppercase characters?");
   needLowerChar = confirm("Do you want lowercase letters?");
   needSpeChar = confirm("Do you want special characters?");
   needNumber = confirm("Do you want numbers?");
+  
 }
 
 generateBtn.addEventListener("click", passParameters);
